@@ -1,0 +1,16 @@
+#
+# Copyright 2019 Broadcom
+# The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config SOC_SERIES_VALKYRIE
+	bool "Broadcom Valkyrie Series"
+	select SOC_FAMILY_BRCM_VK
+	select ARM64
+	select CPU_CORTEX_A72
+	select ARM_ARCH_TIMER
+	select GIC_V3
+	help
+	 Enable support for Broadcom Valkyrie Series

@@ -1,0 +1,19 @@
+#
+# Copyright 2019 Broadcom
+# The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config SOC_FAMILY_BRCM_VK
+	bool
+	# omit prompt to signify a "hidden" option
+	default n
+
+if SOC_FAMILY_BRCM_VK
+config SOC_FAMILY
+	string
+	default "brcm_vk"
+endif
+
+gsource "soc/arm/brcm_vk/*/Kconfig.soc"

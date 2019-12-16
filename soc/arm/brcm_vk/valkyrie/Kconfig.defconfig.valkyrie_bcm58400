@@ -1,0 +1,13 @@
+#
+# Copyright 2019 Broadcom
+# The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+if SOC_BCM58400
+
+config SOC
+	default "BCM58400"
+
+endif # SOC_BCM58400

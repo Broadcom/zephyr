@@ -1,0 +1,23 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/*
+ * Copyright 2019 Broadcom.
+ */
+
+/dts-v1/;
+
+#include <broadcom/valkyrie.dtsi>
+
+/ {
+	model = "Valkyrie bcm958400";
+
+	chosen {
+		zephyr,sram = &memory;
+		zephyr,console = &uart0;
+		zephyr,shell-uart = &uart0;
+	};
+};
+
+&uart0 {
+	status = "okay";
+	current-speed = <57600>;
+};

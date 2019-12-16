@@ -1,0 +1,9 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2019 Broadcom
+#
+
+config BOARD_BRCM_VALKYRIE_BCM958400
+	bool "Broadcom Valkyrie SoC BCM958400 board"
+	depends on SOC_BCM58400

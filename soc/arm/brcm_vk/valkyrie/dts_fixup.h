@@ -1,0 +1,24 @@
+/*
+ * Copyright (C) 2019 Broadcom. All Rights Reserved.
+ * The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* SoC level DTS fixup file */
+
+#define DT_UART_NS16550_PORT_0_BASE_ADDR \
+	DT_NS16550_48100000_BASE_ADDRESS
+#define DT_UART_NS16550_PORT_0_CLK_FREQ  \
+	DT_NS16550_48100000_CLOCK_FREQUENCY
+#define DT_UART_NS16550_PORT_0_NAME		DT_NS16550_48100000_LABEL
+#define DT_UART_NS16550_PORT_0_BAUD_RATE \
+	DT_NS16550_48100000_CURRENT_SPEED
+
+#define DT_UART_NS16550_PORT_0_IRQ	\
+	DT_NS16550_48100000_IRQ_0
+#define DT_UART_NS16550_PORT_0_IRQ_PRI	\
+	DT_NS16550_48100000_IRQ_0_PRIORITY
+#define DT_UART_NS16550_PORT_0_IRQ_FLAGS \
+	DT_NS16550_48100000_IRQ_0_FLAGS
+/* End of SoC Level DTS fixup file */

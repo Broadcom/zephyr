@@ -1,0 +1,58 @@
+/*
+ * Copyright (C) 2019 Broadcom. All Rights Reserved.
+ * The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <arm/armv8-a.dtsi>
+
+/ {
+
+	memory: memory@62000000 {
+		compatible = "mmio-sram";
+		device_type = "memory";
+		reg = <0x62000000 0x100000>;
+	};
+
+	soc {
+		interrupt-parent = <&gic>;
+
+		gic: interrupt-controller@42700000 {
+			compatible = "arm,gic";
+			reg = <0x42700000 0x010000>,
+			      <0x42780000 0x600000>;
+			interrupt-controller;
+			#interrupt-cells = <4>;
+			label = "GIC";
+			status = "okay";
+		};
+
+		uart0: uart@48100000 {
+			device_type = "serial";
+			compatible = "ns16550";
+			reg = <0x48100000 0x1000>;
+			reg-shift = <2>;
+			clock-frequency = <100000000>;
+			interrupt-parent = <&gic>;
+			interrupts = <GIC_SPI 181 IRQ_DEFAULT_PRIORITY
+					IRQ_TYPE_LEVEL>;
+			label = "CHIP_COMMON_UART_1";
+			status = "disabled";
+		};
+
+		arch_timer: timer {
+			compatible = "arm,arm-timer";
+			interrupts = <GIC_PPI 13 IRQ_DEFAULT_PRIORITY
+					IRQ_TYPE_LEVEL>,
+				     <GIC_PPI 14 IRQ_DEFAULT_PRIORITY
+					IRQ_TYPE_LEVEL>,
+				     <GIC_PPI 11 IRQ_DEFAULT_PRIORITY
+					IRQ_TYPE_LEVEL>,
+				     <GIC_PPI 10 IRQ_DEFAULT_PRIORITY
+					IRQ_TYPE_LEVEL>;
+			label = "arch_timer";
+		};
+	};
+};
