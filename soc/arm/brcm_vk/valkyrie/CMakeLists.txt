@@ -8,3 +8,4 @@
 zephyr_sources(
   soc.c
   )
+zephyr_library_sources_ifdef(CONFIG_ARM_MMU arm_mmu_regions.c)
