@@ -39,6 +39,8 @@
 #define ROM_ADDR (CONFIG_FLASH_BASE_ADDRESS + CONFIG_FLASH_LOAD_OFFSET)
 #endif
 
+#define PAGE_SIZE	0x1000
+
 #if CONFIG_FLASH_LOAD_SIZE > 0
   #define ROM_SIZE CONFIG_FLASH_LOAD_SIZE
 #else
@@ -116,6 +118,7 @@ SECTIONS
 
     SECTION_PROLOGUE(_TEXT_SECTION_NAME,,)
 	{
+	_image_text_start = .;
 
 	. = CONFIG_TEXT_SECTION_OFFSET;
 
@@ -148,7 +151,6 @@ SECTIONS
 
     SECTION_PROLOGUE(_TEXT_SECTION_NAME_2,,)
 	{
-	_image_text_start = .;
 	*(.text)
 	*(".text.*")
 	*(.gnu.linkonce.t.*)
@@ -162,9 +164,11 @@ SECTIONS
 #include <linker/priv_stacks-text.ld>
 #include <linker/kobject-text.ld>
 
+	. = ALIGN(PAGE_SIZE);
 	} GROUP_LINK_IN(ROMABLE_REGION)
 
 	_image_text_end = .;
+	_image_text_size = _image_text_end - _image_text_start;
 
 #if defined (CONFIG_CPLUSPLUS)
 	SECTION_PROLOGUE(.ARM.extab,,)
@@ -217,22 +221,13 @@ SECTIONS
 #include <linker/priv_stacks-rom.ld>
 #include <linker/kobject-rom.ld>
 
-	/*
-	 * For XIP images, in order to avoid the situation when __data_rom_start
-	 * is 32-bit aligned, but the actual data is placed right after rodata
-	 * section, which may not end exactly at 32-bit border, pad rodata
-	 * section, so __data_rom_start points at data and it is 32-bit aligned.
-	 *
-	 * On non-XIP images this may enlarge image size up to 3 bytes. This
-	 * generally is not an issue, since modern ROM and FLASH memory is
-	 * usually 4k aligned.
-	 */
-	. = ALIGN(4);
+	. = ALIGN(PAGE_SIZE);
 	} GROUP_LINK_IN(ROMABLE_REGION)
 
 #include <linker/cplusplus-rom.ld>
 
 	_image_rodata_end = .;
+	_image_rodata_size = _image_rodata_end - _image_rodata_start;
 	MPU_ALIGN(_image_rodata_end -_image_rom_start);
 	_image_rom_end = .;
 
