@@ -7,6 +7,14 @@
 #ifndef ZEPHYR_INCLUDE_ARCH_ARM64_MMU_ARM_MMU_H_
 #define ZEPHYR_INCLUDE_ARCH_ARM64_MMU_ARM_MMU_H_
 
+/* Helper macros to define memory region size */
+#define SZ_4K	0x1000
+#define SZ_1M	(256 * SZ_4K)
+#define SZ_2M	(2 * SZ_1M)
+#define SZ_4M	(2 * SZ_2M)
+#define SZ_512M (256 * SZ_2M)
+#define SZ_1G   (2 * SZ_512M)
+
 /* Following Memory types supported through MAIR encodings can be passed
  * by user through "attrs"(attributes) field of specified memory region.
  * As MAIR supports such 8 encodings, we will reserve attrs[2:0];
