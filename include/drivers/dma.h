@@ -77,13 +77,18 @@ enum dma_addr_adj {
  *     reserved           [ 13 : 15 ]
  */
 struct dma_block_config {
-	uint32_t source_address;
-	uint32_t source_gather_interval;
-	uint32_t dest_address;
-	uint32_t dest_scatter_interval;
-	uint16_t dest_scatter_count;
-	uint16_t source_gather_count;
-	uint32_t block_size;
+#ifdef CONFIG_DMA_64BIT
+	u64_t source_address;
+	u64_t dest_address;
+#else
+	u32_t source_address;
+	u32_t dest_address;
+#endif
+	u32_t source_gather_interval;
+	u32_t dest_scatter_interval;
+	u16_t dest_scatter_count;
+	u16_t source_gather_count;
+	u32_t block_size;
 	struct dma_block_config *next_block;
 	uint16_t  source_gather_en :  1;
 	uint16_t  dest_scatter_en :   1;
